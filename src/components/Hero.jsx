@@ -32,7 +32,7 @@ export default function Hero() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="inline-flex w-fit items-center gap-2.5 px-3.5 py-2 mb-9 rounded-full border border-line text-[11px] tracking-[0.25em] uppercase text-ink-dim backdrop-blur-md"
       >
-        <span className="w-2 h-2 rounded-full bg-[#56e08a] shadow-[0_0_12px_#56e08a] pulse-dot" />
+        <span className="w-2 h-2 rounded-full bg-[#16a34a] shadow-[0_0_10px_#16a34a] pulse-dot" />
         Ouvert · 11:15 → 23:30
       </motion.div>
 

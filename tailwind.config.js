@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#f6efe6",
-        "ink-dim": "rgba(246,239,230,0.55)",
-        "ink-soft": "rgba(246,239,230,0.3)",
-        bg: "#0a0608",
-        "bg-2": "#120a0a",
+        ink: "#241712",
+        "ink-dim": "rgba(36,23,18,0.62)",
+        "ink-soft": "rgba(36,23,18,0.35)",
+        bg: "#f6ecdc",
+        "bg-2": "#ecdfc8",
         flame: "#ff5b2e",
-        "flame-2": "#ff8a3d",
-        gold: "#f4b860",
-        "gold-2": "#ffd28a",
-        cream: "#f8e9cf",
-        line: "rgba(246,239,230,0.12)",
-        "line-strong": "rgba(246,239,230,0.22)",
+        "flame-2": "#e8421a",
+        gold: "#b8741a",
+        "gold-2": "#d49230",
+        cream: "#fff5e3",
+        line: "rgba(36,23,18,0.12)",
+        "line-strong": "rgba(36,23,18,0.22)",
       },
       fontFamily: {
         display: ['"Bebas Neue"', "Inter", "sans-serif"],
@@ -24,7 +24,7 @@ export default {
       },
       backgroundImage: {
         "grad-flame":
-          "linear-gradient(135deg, #ff5b2e 0%, #ff8a3d 45%, #f4b860 100%)",
+          "linear-gradient(135deg, #ff5b2e 0%, #e8421a 50%, #b8741a 100%)",
       },
     },
   },

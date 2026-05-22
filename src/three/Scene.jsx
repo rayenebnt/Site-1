@@ -38,7 +38,7 @@ export default function Scene() {
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 7], fov: 45, near: 0.1, far: 100 }}
         onCreated={({ gl }) => {
-          gl.setClearColor(new THREE.Color("#0a0608"), 1);
+          gl.setClearColor(new THREE.Color("#f6ecdc"), 1);
         }}
       >
         {/* No lights needed — shader material */}

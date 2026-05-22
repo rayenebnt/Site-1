@@ -50,12 +50,12 @@ export default function Cursor() {
       <div
         ref={ring}
         aria-hidden
-        className="pointer-events-none fixed top-0 left-0 z-[99] w-9 h-9 rounded-full border border-gold mix-blend-difference transition-transform duration-200 ease-out"
+        className="pointer-events-none fixed top-0 left-0 z-[99] w-9 h-9 rounded-full border border-flame transition-transform duration-200 ease-out"
       />
       <div
         ref={dot}
         aria-hidden
-        className="pointer-events-none fixed top-0 left-0 z-[99] w-1.5 h-1.5 rounded-full bg-gold"
+        className="pointer-events-none fixed top-0 left-0 z-[99] w-1.5 h-1.5 rounded-full bg-flame"
       />
     </>
   );

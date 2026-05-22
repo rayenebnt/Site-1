@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
   html {
     scroll-behavior: smooth;
-    background: #0a0608;
+    background: #f6ecdc;
   }
   body {
     @apply bg-bg text-ink font-sans antialiased overflow-x-hidden;
@@ -38,10 +38,10 @@
     @apply inline-flex items-center gap-3 px-7 py-4 rounded-full text-[13px] font-semibold tracking-[0.06em] uppercase transition-all duration-300;
   }
   .btn-primary {
-    @apply bg-grad-flame text-[#1a0a0a] shadow-[0_14px_40px_rgba(255,91,46,0.35)] hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(255,91,46,0.5)];
+    @apply bg-grad-flame text-white shadow-[0_14px_40px_rgba(255,91,46,0.35)] hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(255,91,46,0.5)];
   }
   .btn-ghost {
-    @apply border border-line-strong text-ink hover:bg-white/5 hover:-translate-y-0.5 backdrop-blur-sm;
+    @apply border border-line-strong text-ink hover:bg-ink/5 hover:-translate-y-0.5 backdrop-blur-sm;
   }
 }
 
@@ -49,16 +49,16 @@
 .grain::before {
   content: "";
   position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  opacity: 0.07;
-  mix-blend-mode: overlay;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
 }
 .vignette::after {
   content: "";
   position: fixed; inset: 0; z-index: 1; pointer-events: none;
   background:
-    radial-gradient(120% 80% at 50% 0%, transparent 40%, rgba(0,0,0,0.55) 100%),
-    radial-gradient(80% 60% at 50% 100%, transparent 40%, rgba(0,0,0,0.7) 100%);
+    radial-gradient(120% 80% at 50% 0%, transparent 50%, rgba(184,116,26,0.12) 100%),
+    radial-gradient(80% 60% at 50% 100%, transparent 50%, rgba(36,23,18,0.18) 100%);
 }
 
 /* Hide scrollbar on mobile menu */
@@ -120,7 +120,7 @@
   }
 }
 
-/* Map iframe filter */
+/* Map iframe filter — warm tint on the light OSM tiles */
 .map-frame iframe {
-  filter: invert(0.92) hue-rotate(180deg) saturate(0.4);
+  filter: sepia(0.25) saturate(0.85) hue-rotate(-10deg) contrast(0.95);
 }

@@ -39,10 +39,10 @@ export default function ParticleMorph({ morphRef, mouseRef }) {
       uSize: { value: 22 },
       uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
       uMouse: { value: new THREE.Vector3(999, 999, 999) },
-      uDispersion: { value: 1.0 },
+      uDispersion: { value: 0.7 },
       uColorA: { value: new THREE.Color("#ff5b2e") },
-      uColorB: { value: new THREE.Color("#f4b860") },
-      uColorC: { value: new THREE.Color("#ffd28a") },
+      uColorB: { value: new THREE.Color("#c2410c") },
+      uColorC: { value: new THREE.Color("#7a3a14") },
     };
 
     return { geometry: geo, uniforms: uni };
@@ -60,9 +60,9 @@ export default function ParticleMorph({ morphRef, mouseRef }) {
     const u = matRef.current.uniforms;
     u.uTime.value += dt;
 
-    // Smoothly ease morph toward scroll target
+    // Snappy ease toward scroll target — fast lerp so morphs land quickly
     const target = morphRef.current ?? 0;
-    u.uMorph.value += (target - u.uMorph.value) * Math.min(1, dt * 3.5);
+    u.uMorph.value += (target - u.uMorph.value) * Math.min(1, dt * 10);
 
     // Mouse — project NDC into world plane z=0
     if (mouseRef.current) {
@@ -87,7 +87,7 @@ export default function ParticleMorph({ morphRef, mouseRef }) {
         fragmentShader={fragmentShader}
         transparent
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={THREE.NormalBlending}
       />
     </points>
   );

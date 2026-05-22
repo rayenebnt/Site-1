@@ -30,12 +30,17 @@ export const vertexShader = /* glsl */ `
 
   void main() {
     // Pick the two targets and the local t for the current morph segment.
+    // Sharpened ease — particles snap into the next shape quickly.
     vec3 target;
     float seg = clamp(uMorph, 0.0, 2.0);
+    float local = seg <= 1.0 ? seg : seg - 1.0;
+    // Snappy ease-in-out: faster middle, settles quickly
+    float t = local * local * (3.0 - 2.0 * local);
+    t = t * t * (3.0 - 2.0 * t);
     if (seg <= 1.0) {
-      target = mix(aPosA, aPosB, smoothstep(0.0, 1.0, seg));
+      target = mix(aPosA, aPosB, t);
     } else {
-      target = mix(aPosB, aPosC, smoothstep(0.0, 1.0, seg - 1.0));
+      target = mix(aPosB, aPosC, t);
     }
 
     // Time-based wobble per particle
@@ -96,8 +101,9 @@ export const fragmentShader = /* glsl */ `
     // Distance fade
     float fade = clamp(1.2 - vDepth / 24.0, 0.0, 1.0);
 
-    vec3 finalCol = col * (0.7 + glow * 0.8);
-    float alpha = core * fade;
+    // On a light bg we want crisp dark dots, not bloom — keep colors as-is.
+    vec3 finalCol = col;
+    float alpha = core * fade * 0.85;
 
     gl_FragColor = vec4(finalCol, alpha);
   }
