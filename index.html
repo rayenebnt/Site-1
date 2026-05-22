@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Le Crousty — Bonneuil-sur-Marne · Burgers, Tacos & Sandwichs Gratinés</title>
+<meta name="description" content="Le Crousty à Bonneuil-sur-Marne — burgers halal, tacos français et sandwichs gratinés au four. Smash burgers, Méga Burger 180, frites cheddar bacon, tiramisu maison." />
+<meta name="theme-color" content="#0a0608" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%94%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;800&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- 3D background canvas -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- Loader -->
+<div id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <div class="loader-logo">LE&nbsp;CROUSTY</div>
+    <div class="loader-bar"><span></span></div>
+    <div class="loader-sub">Bonneuil-sur-Marne · depuis 2019</div>
+  </div>
+</div>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+<!-- Nav -->
+<header class="nav" id="nav">
+  <a href="#" class="brand">
+    <span class="brand-mark">C</span>
+    <span class="brand-name">Le Crousty<small>Bonneuil</small></span>
+  </a>
+  <nav class="nav-links">
+    <a href="#story" data-link>Histoire</a>
+    <a href="#menu" data-link>Menu</a>
+    <a href="#signature" data-link>Signatures</a>
+    <a href="#visit" data-link>Visiter</a>
+  </nav>
+  <a href="https://www.instagram.com/croustybonneuil/" target="_blank" rel="noopener" class="cta-mini">
+    <span>Commander</span>
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></svg>
+  </a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-eyebrow">
+    <span class="dot"></span> Ouvert · 11:15 → 23:30
+  </div>
+
+  <h1 class="hero-title">
+    <span class="line"><span class="word">Le</span> <span class="word italic">goût</span></span>
+    <span class="line"><span class="word">de</span> <span class="word strong">Bonneuil.</span></span>
+  </h1>
+
+  <p class="hero-lede">
+    Burgers smashés, tacos français généreux et sandwichs gratinés au four — depuis 2019,
+    six avenue de Paris. <em>100% halal, 100% maison.</em>
+  </p>
+
+  <div class="hero-actions">
+    <a href="#menu" class="btn primary" data-link>
+      <span>Découvrir le menu</span>
+      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></svg>
+    </a>
+    <a href="#visit" class="btn ghost" data-link>Nous trouver</a>
+  </div>
+
+  <div class="hero-meta">
+    <div><strong>4.8</strong><span>★ 1 200+ avis</span></div>
+    <div><strong>2019</strong><span>l'année du premier Crousty</span></div>
+    <div><strong>02h</strong><span>vendredi & samedi</span></div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span></span>scroll
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>SMASH BURGER</span><i>✦</i>
+    <span>TACOS FRANÇAIS</span><i>✦</i>
+    <span>SANDWICH GRATINÉ</span><i>✦</i>
+    <span>CHEDDAR BACON FRIES</span><i>✦</i>
+    <span>TIRAMISU MAISON</span><i>✦</i>
+    <span>MÉGA BURGER 180</span><i>✦</i>
+    <span>SMASH BURGER</span><i>✦</i>
+    <span>TACOS FRANÇAIS</span><i>✦</i>
+    <span>SANDWICH GRATINÉ</span><i>✦</i>
+    <span>CHEDDAR BACON FRIES</span><i>✦</i>
+    <span>TIRAMISU MAISON</span><i>✦</i>
+    <span>MÉGA BURGER 180</span><i>✦</i>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-tag">01 — Notre histoire</div>
+  <div class="story-grid">
+    <div class="story-text">
+      <h2 class="reveal">
+        On a ouvert en 2019, avenue de Paris.<br/>
+        Depuis, on cuisine pour <em>vous</em>.
+      </h2>
+      <p class="reveal">
+        Le Crousty, c'est une cuisine du quartier — généreuse, droite, sans artifice.
+        Du pain qui croustille, du fromage qui file, des frites coupées épaisses,
+        et cette obsession du bon produit halal et frais.
+      </p>
+      <p class="reveal">
+        On ne fait pas dans le compliqué. On fait dans le <strong>vrai</strong>.
+        Et on le fait bien.
+      </p>
+      <div class="story-stats">
+        <div class="reveal"><b>6</b><span>Avenue de Paris</span></div>
+        <div class="reveal"><b>94380</b><span>Bonneuil-sur-Marne</span></div>
+        <div class="reveal"><b>100%</b><span>Halal certifié</span></div>
+      </div>
+    </div>
+    <div class="story-art" aria-hidden="true">
+      <div class="floating-card" data-depth="0.6">
+        <div class="ring"></div>
+        <div class="ring two"></div>
+        <div class="ring three"></div>
+        <div class="badge">EST. 2019</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="section-head">
+    <div class="story-tag">02 — La carte</div>
+    <h2 class="section-title">
+      Une carte courte.<br/>
+      <em>Des classiques bien faits.</em>
+    </h2>
+  </div>
+
+  <div class="menu-tabs" role="tablist">
+    <button class="tab active" data-cat="burgers" role="tab">Burgers</button>
+    <button class="tab" data-cat="tacos" role="tab">Tacos</button>
+    <button class="tab" data-cat="gratines" role="tab">Gratinés</button>
+    <button class="tab" data-cat="sides" role="tab">À côté</button>
+    <button class="tab" data-cat="desserts" role="tab">Desserts</button>
+  </div>
+
+  <div class="menu-grid" id="menu-grid">
+    <!-- injected by JS -->
+  </div>
+
+  <p class="menu-note">
+    Tous nos plats sont préparés à la commande. Viande halal certifiée.
+    Prix indicatifs — la carte définitive est en magasin et sur Uber Eats / Deliveroo.
+  </p>
+</section>
+
+<!-- SIGNATURE -->
+<section class="signature" id="signature">
+  <div class="story-tag">03 — La signature</div>
+  <h2 class="sig-title">Méga&nbsp;Burger&nbsp;<span class="num">180</span></h2>
+  <p class="sig-lede">
+    Deux steaks smashés à 180 grammes, double cheddar fondu, bacon de bœuf,
+    sauce maison, oignons caramélisés, pain brioché toasté.
+    Le burger qui a fait notre réputation.
+  </p>
+  <div class="sig-meta">
+    <div><span>Poids</span><b>360 g</b></div>
+    <div><span>Cuisson</span><b>Smash · 90 sec</b></div>
+    <div><span>Servi avec</span><b>Frites maison</b></div>
+  </div>
+  <div class="sig-stage" aria-hidden="true"><canvas id="sig-canvas"></canvas></div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="story-tag">04 — Nous trouver</div>
+  <div class="visit-grid">
+    <div class="visit-info">
+      <h2>Bonneuil-sur-Marne.<br/><em>Tous les jours.</em></h2>
+      <div class="visit-block">
+        <h4>Adresse</h4>
+        <p>6 Avenue de Paris<br/>94380 Bonneuil-sur-Marne</p>
+      </div>
+      <div class="visit-block">
+        <h4>Horaires</h4>
+        <p>
+          Dimanche → Jeudi · <b>11:15 — 23:30</b><br/>
+          Vendredi & Samedi · <b>11:15 — 02:00</b>
+        </p>
+      </div>
+      <div class="visit-block">
+        <h4>Téléphone</h4>
+        <p><a href="tel:+33953162347">09 53 16 23 47</a></p>
+      </div>
+      <div class="visit-block">
+        <h4>Commander en ligne</h4>
+        <p class="links-row">
+          <a href="https://www.ubereats.com/fr/store/le-crousty-bonneuil/eDWB3U_7V-mCy8cG455mQg" target="_blank" rel="noopener">Uber Eats →</a>
+          <a href="https://deliveroo.fr/fr/menu/paris/vincennes-centre/le-crousty-bonneuil-sur-marne" target="_blank" rel="noopener">Deliveroo →</a>
+          <a href="https://www.instagram.com/croustybonneuil/" target="_blank" rel="noopener">Instagram →</a>
+        </p>
+      </div>
+    </div>
+    <div class="visit-map">
+      <iframe
+        title="Plan Le Crousty Bonneuil"
+        loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=2.475%2C48.766%2C2.495%2C48.776&layer=mapnik&marker=48.771%2C2.485"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a href="https://www.openstreetmap.org/?mlat=48.771&mlon=2.485#map=17/48.771/2.485" target="_blank" rel="noopener" class="map-open">Ouvrir la carte ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="foot-grid">
+    <div>
+      <div class="brand foot-brand">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">Le Crousty<small>Bonneuil</small></span>
+      </div>
+      <p>Burgers · Tacos · Sandwichs gratinés.<br/>Avenue de Paris, depuis 2019.</p>
+    </div>
+    <div>
+      <h5>Navigation</h5>
+      <a href="#story" data-link>Histoire</a>
+      <a href="#menu" data-link>Menu</a>
+      <a href="#signature" data-link>Signatures</a>
+      <a href="#visit" data-link>Nous trouver</a>
+    </div>
+    <div>
+      <h5>Suivez-nous</h5>
+      <a href="https://www.instagram.com/croustybonneuil/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/p/Le-Crousty-100054457059795/" target="_blank" rel="noopener">Facebook</a>
+      <a href="tel:+33953162347">09 53 16 23 47</a>
+    </div>
+    <div>
+      <h5>Légal</h5>
+      <p>© <span id="year"></span> Le Crousty — Bonneuil-sur-Marne.<br/>Tous droits réservés.</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>Site fait avec ❤︎ pour Le Crousty.</span>
+    <span>v1.0</span>
+  </div>
+</footer>
+
+<!-- Three.js via CDN (importmap) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
