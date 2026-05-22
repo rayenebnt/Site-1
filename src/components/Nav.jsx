@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 const LINKS = [
-  { href: "#story", label: "Histoire" },
-  { href: "#menu", label: "Menu" },
-  { href: "#signature", label: "Signature" },
-  { href: "#visit", label: "Visiter" },
+  { href: "#story", n: "01", label: "Histoire" },
+  { href: "#menu", n: "02", label: "Menu" },
+  { href: "#signature", n: "03", label: "Signature" },
+  { href: "#visit", n: "04", label: "Visiter" },
 ];
 
 export default function Nav() {
@@ -20,42 +20,40 @@ export default function Nav() {
 
   const scrollTo = (href) => (e) => {
     e.preventDefault();
-    const el = document.querySelector(href);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
     setOpen(false);
   };
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 flex items-center justify-between px-5 sm:px-8 lg:px-16 transition-all duration-500 ${
-        scrolled
-          ? "py-3 bg-bg/70 backdrop-blur-xl backdrop-saturate-150 border-b border-line"
-          : "py-5"
+      className={`fixed top-0 inset-x-0 z-50 flex items-center justify-between px-5 sm:px-8 lg:px-14 transition-all duration-300 ${
+        scrolled ? "py-3 bg-bg/80 backdrop-blur-xl border-b border-line" : "py-5"
       }`}
     >
       <a href="#" className="flex items-center gap-3" onClick={scrollTo("#hero")}>
-        <span className="w-10 h-10 rounded-xl bg-grad-flame grid place-items-center font-display text-2xl text-[#1a0a0a] shadow-[0_8px_30px_rgba(255,91,46,0.35)]">
+        <span className="w-9 h-9 bg-flame grid place-items-center font-display text-bg font-bold text-lg leading-none">
           C
         </span>
-        <span className="font-display text-lg leading-none tracking-[0.04em] flex flex-col">
-          Le Crousty
-          <small className="font-sans text-[9px] tracking-[0.3em] text-ink-dim mt-1">
-            BONNEUIL
-          </small>
+        <span className="flex flex-col leading-none">
+          <span className="font-display font-semibold text-[15px] tracking-tighter">
+            Le Crousty
+          </span>
+          <span className="mono text-[9px] tracking-[0.22em] text-ink-dim mt-1">
+            BONNEUIL · EST. 2019
+          </span>
         </span>
       </a>
 
-      <nav className="hidden md:flex gap-9 text-[13px] tracking-[0.04em]">
+      <nav className="hidden md:flex gap-7 mono text-[11px]">
         {LINKS.map((l) => (
           <a
             key={l.href}
             href={l.href}
             onClick={scrollTo(l.href)}
-            className="relative text-ink-dim hover:text-ink transition-colors group"
+            className="group flex items-center gap-2 text-ink-dim hover:text-ink transition-colors"
           >
-            {l.label}
-            <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all group-hover:w-full" />
+            <span className="text-flame">{l.n}</span>
+            <span>{l.label}</span>
           </a>
         ))}
       </nav>
@@ -64,16 +62,16 @@ export default function Nav() {
         href="https://www.ubereats.com/fr/store/le-crousty-bonneuil/eDWB3U_7V-mCy8cG455mQg"
         target="_blank"
         rel="noopener"
-        className="hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ink text-bg text-[12px] font-semibold tracking-[0.04em] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(244,184,96,0.25)] transition"
+        className="hidden md:inline-flex btn btn-primary !py-2.5 !px-4"
       >
         Commander
-        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
           <path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z" />
         </svg>
       </a>
 
       <button
-        className="md:hidden w-10 h-10 grid place-items-center rounded-lg border border-line-strong"
+        className="md:hidden w-9 h-9 border border-line-strong grid place-items-center"
         aria-label="Menu"
         onClick={() => setOpen((o) => !o)}
       >
@@ -86,15 +84,21 @@ export default function Nav() {
       {open && (
         <div className="absolute top-full inset-x-0 md:hidden bg-bg/95 backdrop-blur-xl border-b border-line py-6 px-5 flex flex-col gap-4">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={scrollTo(l.href)} className="text-ink text-lg">
-              {l.label}
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={scrollTo(l.href)}
+              className="flex items-baseline gap-3 text-ink"
+            >
+              <span className="mono text-flame text-xs">{l.n}</span>
+              <span className="font-display text-lg">{l.label}</span>
             </a>
           ))}
           <a
             href="https://www.ubereats.com/fr/store/le-crousty-bonneuil/eDWB3U_7V-mCy8cG455mQg"
             target="_blank"
             rel="noopener"
-            className="btn btn-primary justify-center"
+            className="btn btn-primary justify-center mt-2"
           >
             Commander
           </a>

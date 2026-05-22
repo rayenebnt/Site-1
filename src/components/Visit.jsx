@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionHeader } from "./Story.jsx";
 
 const reveal = {
   hidden: { opacity: 0, y: 30 },
@@ -7,43 +8,51 @@ const reveal = {
 
 export default function Visit() {
   return (
-    <section id="visit" className="container-x py-32">
-      <div className="tag mb-5">04 — Nous trouver</div>
-      <div className="grid lg:grid-cols-2 gap-14 mt-8">
+    <section id="visit" className="container-x py-28 md:py-36">
+      <SectionHeader n="04" title="LIEU" file="coords.geo" />
+
+      <motion.h2
+        variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
+        className="h-display text-[clamp(40px,7vw,100px)] mt-10 mb-12"
+      >
+        Bonneuil.<br />
+        <span className="accent">Tous les jours.</span>
+      </motion.h2>
+
+      <div className="grid lg:grid-cols-2 gap-0 border-t border-l border-line">
         <motion.div
           variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
+          className="border-b border-r border-line"
         >
-          <h2 className="h-display text-[clamp(40px,6vw,72px)] m-0 mb-10">
-            Bonneuil-sur-Marne.<br />
-            <span className="italic-grad">Tous les jours.</span>
-          </h2>
-
-          <Block title="Adresse">
+          <Block k="ADRESSE">
             6 Avenue de Paris<br />
             94380 Bonneuil-sur-Marne
           </Block>
-          <Block title="Horaires">
-            Dimanche → Jeudi · <b className="text-ink">11:15 — 23:30</b><br />
-            Vendredi & Samedi · <b className="text-ink">11:15 — 02:00</b>
+          <Block k="HORAIRES">
+            DIM → JEU&nbsp;&nbsp;<span className="text-ink">11:15 — 23:30</span><br />
+            VEN · SAM&nbsp;&nbsp;<span className="text-ink">11:15 — 02:00</span>
           </Block>
-          <Block title="Téléphone">
-            <a href="tel:+33953162347" className="border-b border-gold pb-0.5 hover:text-gold transition">
+          <Block k="TELEPHONE">
+            <a href="tel:+33953162347" className="text-flame underline underline-offset-4 hover:text-flame-2">
               09 53 16 23 47
             </a>
           </Block>
-          <Block title="Commander en ligne">
-            <span className="flex flex-wrap gap-6">
-              <a className="text-gold border-b border-gold text-sm" href="https://www.ubereats.com/fr/store/le-crousty-bonneuil/eDWB3U_7V-mCy8cG455mQg" target="_blank" rel="noopener">Uber Eats →</a>
-              <a className="text-gold border-b border-gold text-sm" href="https://deliveroo.fr/fr/menu/paris/vincennes-centre/le-crousty-bonneuil-sur-marne" target="_blank" rel="noopener">Deliveroo →</a>
-              <a className="text-gold border-b border-gold text-sm" href="https://www.instagram.com/croustybonneuil/" target="_blank" rel="noopener">Instagram →</a>
+          <Block k="COMMANDER" last>
+            <span className="flex flex-wrap gap-4 mono text-[12px]">
+              <a className="text-flame underline underline-offset-4" href="https://www.ubereats.com/fr/store/le-crousty-bonneuil/eDWB3U_7V-mCy8cG455mQg" target="_blank" rel="noopener">UBER EATS ↗</a>
+              <a className="text-flame underline underline-offset-4" href="https://deliveroo.fr/fr/menu/paris/vincennes-centre/le-crousty-bonneuil-sur-marne" target="_blank" rel="noopener">DELIVEROO ↗</a>
+              <a className="text-flame underline underline-offset-4" href="https://www.instagram.com/croustybonneuil/" target="_blank" rel="noopener">INSTAGRAM ↗</a>
             </span>
           </Block>
         </motion.div>
 
         <motion.div
           variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-          className="relative rounded-2xl overflow-hidden border border-line bg-bg-2 min-h-[460px] map-frame"
+          className="relative border-b border-r border-line min-h-[460px] map-frame overflow-hidden"
         >
+          <div className="absolute top-3 left-3 z-10 mono text-[9px] text-ink-soft tracking-wider bg-bg/80 px-2 py-1 border border-line">
+            48.771°N · 2.485°E
+          </div>
           <iframe
             title="Plan Le Crousty Bonneuil"
             loading="lazy"
@@ -54,9 +63,9 @@ export default function Visit() {
           <a
             href="https://www.openstreetmap.org/?mlat=48.771&mlon=2.485#map=17/48.771/2.485"
             target="_blank" rel="noopener"
-            className="absolute bottom-4 right-4 bg-ink text-bg px-4 py-2.5 rounded-full text-xs font-semibold tracking-wide z-10"
+            className="absolute bottom-3 right-3 btn btn-primary !py-2 !px-3 !text-[10px] z-10"
           >
-            Ouvrir la carte ↗
+            OUVRIR LA CARTE ↗
           </a>
         </motion.div>
       </div>
@@ -64,13 +73,11 @@ export default function Visit() {
   );
 }
 
-function Block({ title, children }) {
+function Block({ k, children, last }) {
   return (
-    <div className="py-5 border-t border-line last:border-b last:border-line">
-      <h4 className="text-[10px] tracking-[0.25em] uppercase text-ink-dim font-medium m-0 mb-2.5">
-        {title}
-      </h4>
-      <p className="m-0 text-lg leading-relaxed">{children}</p>
+    <div className={`px-5 py-5 ${last ? "" : "border-b border-line"}`}>
+      <div className="mono text-[10px] text-ink-dim mb-2.5">{k}</div>
+      <div className="font-display text-[17px] leading-relaxed text-ink-dim">{children}</div>
     </div>
   );
 }

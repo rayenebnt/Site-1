@@ -20,14 +20,13 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative grain vignette">
+    <div className="relative vignette">
       <Loader visible={loading} />
       <Cursor />
 
-      {/* Persistent 3D scene behind everything */}
       <Scene />
+      <div className="grid-dots" aria-hidden="true" />
 
-      {/* Content on top */}
       <div className="relative z-[2]">
         <Nav />
         <Hero />

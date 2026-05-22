@@ -1,49 +1,51 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-line py-20 px-5 sm:px-8 lg:px-16 bg-bg-2/60 backdrop-blur-md">
-      <div className="max-w-[1280px] mx-auto grid sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 mb-14">
+    <footer className="border-t border-line bg-bg-2/60 backdrop-blur-md">
+      <div className="container-x py-16 grid sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 border-b border-line">
         <div>
           <div className="flex items-center gap-3 mb-5">
-            <span className="w-10 h-10 rounded-xl bg-grad-flame grid place-items-center font-display text-2xl text-[#1a0a0a]">
+            <span className="w-9 h-9 bg-flame grid place-items-center font-display font-bold text-bg text-lg">
               C
             </span>
-            <span className="font-display text-lg leading-none tracking-[0.04em] flex flex-col">
-              Le Crousty
-              <small className="font-sans text-[9px] tracking-[0.3em] text-ink-dim mt-1">
-                BONNEUIL
-              </small>
+            <span className="flex flex-col leading-none">
+              <span className="font-display font-semibold text-[15px] tracking-tighter">Le Crousty</span>
+              <span className="mono text-[9px] tracking-[0.22em] text-ink-dim mt-1">
+                BONNEUIL · EST. 2019
+              </span>
             </span>
           </div>
-          <p className="text-ink-dim text-sm leading-relaxed m-0">
-            Burgers · Tacos · Sandwichs gratinés.<br />
-            Avenue de Paris, depuis 2019.
+          <p className="text-ink-dim text-[13px] leading-relaxed m-0 max-w-[280px]">
+            Burgers, tacos, sandwichs gratinés.<br />
+            6 avenue de Paris, depuis 2019.
           </p>
         </div>
 
-        <FootCol title="Navigation">
-          <FootLink href="#story">Histoire</FootLink>
-          <FootLink href="#menu">Menu</FootLink>
-          <FootLink href="#signature">Signature</FootLink>
-          <FootLink href="#visit">Nous trouver</FootLink>
+        <FootCol title="MAP">
+          <FootLink href="#story">[01] Histoire</FootLink>
+          <FootLink href="#menu">[02] Menu</FootLink>
+          <FootLink href="#signature">[03] Signature</FootLink>
+          <FootLink href="#visit">[04] Visiter</FootLink>
         </FootCol>
 
-        <FootCol title="Suivez-nous">
-          <FootLink href="https://www.instagram.com/croustybonneuil/" ext>Instagram</FootLink>
-          <FootLink href="https://www.facebook.com/p/Le-Crousty-100054457059795/" ext>Facebook</FootLink>
+        <FootCol title="CONTACT">
+          <FootLink href="https://www.instagram.com/croustybonneuil/" ext>Instagram ↗</FootLink>
+          <FootLink href="https://www.facebook.com/p/Le-Crousty-100054457059795/" ext>Facebook ↗</FootLink>
           <FootLink href="tel:+33953162347">09 53 16 23 47</FootLink>
         </FootCol>
 
-        <FootCol title="Légal">
-          <p className="text-ink-dim text-sm leading-relaxed m-0">
-            © {new Date().getFullYear()} Le Crousty — Bonneuil-sur-Marne.<br />
-            Tous droits réservés.
+        <FootCol title="LEGAL">
+          <p className="mono text-[11px] text-ink-dim leading-relaxed m-0 tracking-wider">
+            © {new Date().getFullYear()}<br />
+            LE CROUSTY<br />
+            BONNEUIL-SUR-MARNE<br />
+            ALL RIGHTS RESERVED.
           </p>
         </FootCol>
       </div>
 
-      <div className="max-w-[1280px] mx-auto pt-6 border-t border-line flex justify-between flex-wrap gap-2 text-xs text-ink-dim tracking-wide">
-        <span>Site fait avec ❤︎ pour Le Crousty.</span>
-        <span>v2.0 · React + Three.js</span>
+      <div className="container-x py-6 flex justify-between flex-wrap gap-3 mono text-[10px] text-ink-soft tracking-wider">
+        <span>BUILD v3.0 · REACT + R3F</span>
+        <span>SITE BY <span className="text-flame">CLAUDE</span> · 2026</span>
       </div>
     </footer>
   );
@@ -52,8 +54,8 @@ export default function Footer() {
 function FootCol({ title, children }) {
   return (
     <div>
-      <h5 className="text-[11px] tracking-[0.25em] uppercase text-ink-dim m-0 mb-4 font-medium">{title}</h5>
-      <div className="flex flex-col gap-2">{children}</div>
+      <h5 className="mono text-[10px] tracking-[0.22em] text-ink-dim m-0 mb-4">{title}</h5>
+      <div className="flex flex-col gap-2.5">{children}</div>
     </div>
   );
 }
@@ -61,7 +63,11 @@ function FootCol({ title, children }) {
 function FootLink({ href, children, ext }) {
   const props = ext ? { target: "_blank", rel: "noopener" } : {};
   return (
-    <a href={href} {...props} className="text-ink text-sm hover:text-gold hover:translate-x-1 transition-all">
+    <a
+      href={href}
+      {...props}
+      className="mono text-[12px] text-ink hover:text-flame transition-colors"
+    >
       {children}
     </a>
   );

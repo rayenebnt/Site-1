@@ -1,61 +1,79 @@
 import { motion } from "framer-motion";
 
 const reveal = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export default function Story() {
   return (
-    <section id="story" className="container-x py-32 md:py-40">
-      <div className="tag mb-6">01 — Notre histoire</div>
-      <div className="grid md:grid-cols-[1.2fr_1fr] gap-20 items-center">
+    <section id="story" className="container-x py-28 md:py-36">
+      <SectionHeader n="01" title="HISTOIRE" file="story.md" />
+
+      <div className="grid md:grid-cols-[1.4fr_1fr] gap-12 lg:gap-20 mt-12">
         <div>
           <motion.h2
             variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-            className="h-display text-[clamp(40px,6vw,84px)] mb-8"
+            className="h-display text-[clamp(36px,5.5vw,72px)] mb-8"
           >
-            On a ouvert en 2019, avenue de Paris.<br />
-            Depuis, on cuisine pour <span className="italic-grad">vous</span>.
+            Ouvert en 2019.<br />
+            On cuisine pour <span className="accent">Bonneuil.</span>
           </motion.h2>
           <motion.p
             variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-            className="text-[clamp(15px,1.2vw,17px)] text-ink-dim mb-5 max-w-[520px]"
+            className="text-[clamp(15px,1.15vw,17px)] text-ink-dim mb-5 max-w-[540px] leading-relaxed"
           >
-            Le Crousty, c'est une cuisine du quartier — généreuse, droite, sans artifice.
-            Du pain qui croustille, du fromage qui file, des frites coupées épaisses,
-            et cette obsession du bon produit halal et frais.
+            Cuisine du quartier — généreuse, droite, sans artifice. Pain qui
+            croustille, fromage qui file, frites coupées épaisses. L'obsession
+            du bon produit halal et frais.
           </motion.p>
           <motion.p
             variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-            className="text-[clamp(15px,1.2vw,17px)] text-ink-dim mb-12 max-w-[520px]"
+            className="text-[clamp(15px,1.15vw,17px)] text-ink-dim mb-12 max-w-[540px] leading-relaxed"
           >
-            On ne fait pas dans le compliqué. On fait dans le{" "}
-            <strong className="text-ink font-medium">vrai</strong>. Et on le fait bien.
+            On ne fait pas dans le compliqué. On fait dans le <span className="text-ink">vrai</span>.
+            Et on le fait bien.
           </motion.p>
-          <div className="grid grid-cols-3 gap-8 pt-8 border-t border-line max-w-[520px]">
-            {[
-              { b: "6", s: "Avenue de Paris" },
-              { b: "94380", s: "Bonneuil-sur-Marne" },
-              { b: "100%", s: "Halal certifié" },
-            ].map((x) => (
-              <div key={x.s}>
-                <b className="block font-display text-2xl text-gold font-normal mb-1">{x.b}</b>
-                <span className="text-[11px] tracking-[0.15em] uppercase text-ink-dim">{x.s}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div className="relative aspect-square grid place-items-center max-w-[420px] mx-auto w-full">
-          <span className="absolute w-4/5 h-4/5 border border-line-strong rounded-full spin-slow" />
-          <span className="absolute w-3/5 h-3/5 border border-dashed border-gold rounded-full spin-slow-rev" />
-          <span className="absolute w-2/5 h-2/5 border border-flame rounded-full spin-slower" />
-          <div className="relative font-display text-2xl tracking-[0.15em] px-5 py-3 bg-bg border border-gold rounded-md text-gold">
-            EST. 2019
-          </div>
-        </div>
+        {/* Right column: technical data block */}
+        <motion.div
+          variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
+          className="border border-line"
+        >
+          <DataRow k="ADRESSE" v="6 Avenue de Paris" />
+          <DataRow k="VILLE" v="94380 Bonneuil-sur-Marne" />
+          <DataRow k="DEPUIS" v="2019" />
+          <DataRow k="CERTIFICATION" v="Halal · 100%" />
+          <DataRow k="CUISSON" v="À la commande" />
+          <DataRow k="LIVRAISON" v="Uber · Deliveroo" last />
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+export function SectionHeader({ n, title, file }) {
+  return (
+    <div className="flex items-center justify-between border-b border-line pb-4">
+      <div className="flex items-baseline gap-4">
+        <span className="mono text-flame text-[11px]">[{n}/04]</span>
+        <h3 className="font-display font-medium text-sm tracking-[0.18em] uppercase">{title}</h3>
+      </div>
+      <span className="mono text-[10px] text-ink-soft hidden sm:inline">FILE: {file}</span>
+    </div>
+  );
+}
+
+function DataRow({ k, v, last }) {
+  return (
+    <div
+      className={`flex items-center justify-between gap-6 px-5 py-4 ${
+        last ? "" : "border-b border-line"
+      }`}
+    >
+      <span className="mono text-[10px] text-ink-dim">{k}</span>
+      <span className="font-display text-[15px] text-right">{v}</span>
+    </div>
   );
 }

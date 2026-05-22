@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionHeader } from "./Story.jsx";
 
 const reveal = {
   hidden: { opacity: 0, y: 30 },
@@ -7,50 +8,62 @@ const reveal = {
 
 export default function Signature() {
   return (
-    <section id="signature" className="container-x py-32 text-center relative">
-      <div className="tag inline-block">03 — La signature</div>
+    <section id="signature" className="container-x py-28 md:py-36">
+      <SectionHeader n="03" title="SIGNATURE" file="mega-180.spec" />
 
       <motion.h2
         variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-        className="h-display text-[clamp(56px,12vw,180px)] m-0 mt-6 mb-8"
+        className="h-display text-[clamp(56px,14vw,200px)] mt-10 mb-8"
       >
-        Méga&nbsp;Burger&nbsp;<span className="italic-grad">180</span>
+        MÉGA BURGER<br />
+        <span className="text-flame">180.</span>
       </motion.h2>
 
       <motion.p
         variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-        className="max-w-[620px] mx-auto text-ink-dim text-[clamp(15px,1.3vw,18px)] leading-[1.7] mb-12"
+        className="max-w-[640px] text-[clamp(15px,1.3vw,18px)] text-ink-dim leading-relaxed mb-12"
       >
-        Deux steaks smashés à 180 grammes, double cheddar fondu, bacon de bœuf,
-        sauce maison, oignons caramélisés, pain brioché toasté. Le burger qui a fait notre réputation.
+        Deux steaks smashés à 180 grammes. Double cheddar fondu, bacon de bœuf,
+        sauce maison, oignons caramélisés, pain brioché toasté. Le burger qui a
+        fait notre réputation.
       </motion.p>
 
       <motion.div
         variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-        className="flex flex-wrap justify-center gap-14 py-8 border-y border-line"
+        className="grid grid-cols-2 md:grid-cols-4 border-t border-l border-line"
       >
         {[
-          { s: "Poids", b: "360 g" },
-          { s: "Cuisson", b: "Smash · 90 sec" },
-          { s: "Servi avec", b: "Frites maison" },
+          { k: "POIDS", v: "360 g" },
+          { k: "STEAK", v: "2 × 180 g" },
+          { k: "CUISSON", v: "SMASH · 90s" },
+          { k: "SERVI AVEC", v: "FRITES MAISON" },
         ].map((m) => (
-          <div key={m.s} className="flex flex-col gap-1.5">
-            <span className="text-[11px] tracking-[0.2em] uppercase text-ink-dim">{m.s}</span>
-            <b className="font-display text-3xl font-normal">{m.b}</b>
+          <div key={m.k} className="border-b border-r border-line p-5 sm:p-6">
+            <div className="mono text-[10px] text-ink-dim mb-3">{m.k}</div>
+            <div className="font-display font-medium text-[24px] sm:text-[28px] leading-none tracking-tighter">
+              {m.v}
+            </div>
           </div>
         ))}
       </motion.div>
 
-      <p className="mt-10 text-ink-dim text-sm">
-        Disponible en magasin, sur{" "}
-        <a className="text-gold border-b border-gold pb-0.5" href="https://www.ubereats.com/fr/store/le-crousty-bonneuil/eDWB3U_7V-mCy8cG455mQg" target="_blank" rel="noopener">
-          Uber Eats
+      <p className="mt-10 mono text-[11px] text-ink-dim tracking-wider">
+        DISPONIBLE EN MAGASIN ·{" "}
+        <a
+          className="text-flame underline underline-offset-4 hover:text-flame-2"
+          href="https://www.ubereats.com/fr/store/le-crousty-bonneuil/eDWB3U_7V-mCy8cG455mQg"
+          target="_blank" rel="noopener"
+        >
+          UBER EATS
         </a>{" "}
-        et{" "}
-        <a className="text-gold border-b border-gold pb-0.5" href="https://deliveroo.fr/fr/menu/paris/vincennes-centre/le-crousty-bonneuil-sur-marne" target="_blank" rel="noopener">
-          Deliveroo
+        ·{" "}
+        <a
+          className="text-flame underline underline-offset-4 hover:text-flame-2"
+          href="https://deliveroo.fr/fr/menu/paris/vincennes-centre/le-crousty-bonneuil-sur-marne"
+          target="_blank" rel="noopener"
+        >
+          DELIVEROO
         </a>
-        .
       </p>
     </section>
   );

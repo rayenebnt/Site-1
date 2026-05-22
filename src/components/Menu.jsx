@@ -1,38 +1,33 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MENU, CATEGORIES } from "../data/menu.js";
+import { SectionHeader } from "./Story.jsx";
 
-function Dish({ d, i }) {
-  const onMove = (e) => {
-    const el = e.currentTarget;
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    el.style.transform = `perspective(900px) rotateX(${-py * 4}deg) rotateY(${px * 4}deg)`;
-  };
-  const onLeave = (e) => { e.currentTarget.style.transform = ""; };
-
+function Dish({ d, i, n }) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="hoverable relative bg-bg p-7 sm:p-8 flex flex-col gap-3.5 overflow-hidden min-h-[240px] transition-[background] duration-500 hover:bg-bg-2"
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.4, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+      className="relative border-r border-b border-line p-6 sm:p-7 group hover:bg-bg-2/40 transition-colors"
     >
-      <div className="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-grad-flame opacity-[0.08] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110" />
-      <div className="relative flex items-start justify-between gap-4">
-        <h3 className="font-display text-[26px] tracking-wide leading-none m-0">{d.name}</h3>
-        <span className="font-serif italic text-[22px] text-gold whitespace-nowrap">{d.price}</span>
+      <div className="flex items-baseline justify-between gap-3 mb-3">
+        <span className="mono text-[10px] text-flame">[{n}]</span>
+        {d.tag && (
+          <span className="mono text-[9px] text-ink-dim border border-line px-2 py-0.5">
+            {d.tag.toUpperCase()}
+          </span>
+        )}
       </div>
-      <p className="relative text-ink-dim text-sm leading-relaxed flex-1">{d.desc}</p>
-      {d.tag && (
-        <span className="relative self-start text-[10px] tracking-[0.2em] uppercase text-flame px-2.5 py-1 border border-flame rounded-full">
-          {d.tag}
-        </span>
-      )}
+      <h3 className="font-display font-medium text-[22px] tracking-tighter leading-tight m-0 mb-3">
+        {d.name}
+      </h3>
+      <p className="text-ink-dim text-[13px] leading-relaxed m-0 mb-5 min-h-[3em]">{d.desc}</p>
+      <div className="flex items-end justify-between pt-3 border-t border-line">
+        <span className="mono text-[10px] text-ink-soft">PRICE</span>
+        <span className="font-display text-[20px] text-flame">{d.price}</span>
+      </div>
     </motion.article>
   );
 }
@@ -42,44 +37,42 @@ export default function Menu() {
   const items = MENU[cat] || [];
 
   return (
-    <section id="menu" className="container-x py-32">
-      <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
-        <div>
-          <div className="tag mb-5">02 — La carte</div>
-          <h2 className="h-display text-[clamp(40px,6vw,84px)] m-0">
-            Une carte courte.<br />
-            <span className="italic-grad">Des classiques bien faits.</span>
-          </h2>
-        </div>
-      </div>
+    <section id="menu" className="container-x py-28 md:py-36">
+      <SectionHeader n="02" title="CARTE" file="menu.json" />
 
-      <div className="flex flex-wrap gap-2 mb-12 pb-5 border-b border-line">
-        {CATEGORIES.map((c) => (
+      <h2 className="h-display text-[clamp(40px,7vw,100px)] mt-10 mb-12">
+        Carte courte.<br />
+        <span className="accent">Classiques bien faits.</span>
+      </h2>
+
+      <div className="flex flex-wrap gap-0 mb-px border border-line border-b-0">
+        {CATEGORIES.map((c, i) => (
           <button
             key={c.key}
             onClick={() => setCat(c.key)}
-            className={`px-5 py-2.5 rounded-full text-[13px] tracking-wide font-medium transition-all border ${
+            className={`mono text-[11px] tracking-[0.14em] px-5 py-3 transition-all border-r border-line ${
+              i === CATEGORIES.length - 1 ? "border-r-0 sm:border-r" : ""
+            } ${
               cat === c.key
-                ? "bg-ink text-bg border-ink"
-                : "bg-transparent text-ink-dim border-line-strong hover:text-ink hover:border-ink-dim"
+                ? "bg-flame text-bg"
+                : "bg-transparent text-ink-dim hover:text-ink hover:bg-bg-2/50"
             }`}
           >
-            {c.label}
+            {c.label.toUpperCase()}
           </button>
         ))}
       </div>
 
-      <div className="grid gap-px grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 bg-line border border-line rounded-2xl overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-l border-t border-line">
         <AnimatePresence mode="popLayout">
           {items.map((d, i) => (
-            <Dish d={d} i={i} key={cat + d.name} />
+            <Dish d={d} i={i} n={String(i + 1).padStart(2, "0")} key={cat + d.name} />
           ))}
         </AnimatePresence>
       </div>
 
-      <p className="mt-8 text-center text-xs text-ink-soft tracking-wide">
-        Tous nos plats sont préparés à la commande. Viande halal certifiée.
-        Prix indicatifs — carte définitive en magasin et sur Uber Eats / Deliveroo.
+      <p className="mt-8 mono text-[10px] text-ink-soft tracking-wider">
+        * PRIX INDICATIFS — CARTE DÉFINITIVE EN MAGASIN ET UBER / DELIVEROO
       </p>
     </section>
   );

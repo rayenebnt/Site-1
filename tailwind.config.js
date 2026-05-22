@@ -4,27 +4,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#241712",
-        "ink-dim": "rgba(36,23,18,0.62)",
-        "ink-soft": "rgba(36,23,18,0.35)",
-        bg: "#f6ecdc",
-        "bg-2": "#ecdfc8",
+        ink: "#fafafa",
+        "ink-dim": "rgba(250,250,250,0.55)",
+        "ink-soft": "rgba(250,250,250,0.32)",
+        bg: "#070707",
+        "bg-2": "#0f0f0f",
+        "bg-3": "#161616",
         flame: "#ff5b2e",
-        "flame-2": "#e8421a",
-        gold: "#b8741a",
-        "gold-2": "#d49230",
-        cream: "#fff5e3",
-        line: "rgba(36,23,18,0.12)",
-        "line-strong": "rgba(36,23,18,0.22)",
+        "flame-2": "#ff8a3d",
+        line: "rgba(250,250,250,0.08)",
+        "line-strong": "rgba(250,250,250,0.18)",
       },
       fontFamily: {
-        display: ['"Bebas Neue"', "Inter", "sans-serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
-        serif: ['"Cormorant Garamond"', "Georgia", "serif"],
+        display: ['"Space Grotesk"', "system-ui", "sans-serif"],
+        sans: ['"Space Grotesk"', "system-ui", "sans-serif"],
+        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
-      backgroundImage: {
-        "grad-flame":
-          "linear-gradient(135deg, #ff5b2e 0%, #e8421a 50%, #b8741a 100%)",
+      letterSpacing: {
+        tightest: "-0.04em",
+        tighter: "-0.02em",
       },
     },
   },
