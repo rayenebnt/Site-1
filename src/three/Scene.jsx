@@ -1,22 +1,21 @@
 import { Canvas } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import ParticleMorph from "./ParticleMorph.jsx";
 import * as THREE from "three";
+import BurgerScene from "./BurgerScene.jsx";
+import Steam from "./Steam.jsx";
 
 /**
- * Fixed 3D background canvas. Owns the scroll-driven morph value and
- * shared mouse vector, then passes refs into the particle system.
+ * Fixed 3D background. Owns the shared scroll progress (0..1) and
+ * mouse vector, passes them into the burger + steam children.
  */
 export default function Scene() {
-  const morphRef = useRef(0);
+  const scrollRef = useRef(0);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const p = Math.max(0, Math.min(1, window.scrollY / Math.max(1, max)));
-      // Map scroll to morph 0..2 with a slightly compressed range so each shape lingers.
-      morphRef.current = p * 2;
+      scrollRef.current = Math.max(0, Math.min(1, window.scrollY / Math.max(1, max)));
     };
     const onMove = (e) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -36,13 +35,20 @@ export default function Scene() {
       <Canvas
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        camera={{ position: [0, 0, 7], fov: 45, near: 0.1, far: 100 }}
+        camera={{ position: [0, 0.4, 6], fov: 42, near: 0.1, far: 100 }}
         onCreated={({ gl }) => {
           gl.setClearColor(new THREE.Color("#f6ecdc"), 1);
         }}
       >
-        {/* No lights needed — shader material */}
-        <ParticleMorph morphRef={morphRef} mouseRef={mouseRef} />
+        {/* Warm three-point lighting tuned for a cream background */}
+        <ambientLight intensity={0.55} color="#fff1d8" />
+        <directionalLight position={[4, 6, 5]} intensity={1.4} color="#fff3dc" />
+        <pointLight position={[-5, 3, 4]} intensity={1.6} color="#ffae5e" distance={22} />
+        <pointLight position={[3, -2, 4]} intensity={0.9} color="#ff6a2e" distance={16} />
+        <pointLight position={[0, 4, -4]} intensity={0.5} color="#ffd28a" distance={20} />
+
+        <BurgerScene scrollRef={scrollRef} mouseRef={mouseRef} />
+        <Steam />
       </Canvas>
     </div>
   );
